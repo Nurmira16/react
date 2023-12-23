@@ -1,26 +1,51 @@
-import React from "react";
+import React, { useState } from "react";
 import "./style.css";
-// import classes from "./style.module.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
-import Content from "./components/Content";
-import Text from "./components/Text";
-import Link from "./components/Link";
+import Title from "./components/Title";
+import ToDoList from "./components/ToDoList";
+import Modal from "./components/Modal";
+
 function App() {
-  const paths = ["Home", "About", "Projects", "Contact"];
+  const toDos = [
+    { title: "dance", age: 20, id: 1 },
+    { title: "eat", age: 10, id: 2 },
+    { title: "sport", age: 90, id: 3 },
+  ];
+  const [todos, setToDos] = useState(toDos);
+  const [isShow, setIsShow] = useState(false);
+  const [currentToDo, setCurrentToDo] = useState({});
+
+  const addData = (data) => {
+    const newToDo = [...todos, { ...data, id: Date.now() }];
+    setToDos(newToDo);
+  };
+  const deleteData = (id) => {
+    const newToDo = todos.filter((todo) => todo.id !== id);
+
+    setToDos(newToDo);
+  };
+
+  // Modal
+  const handleOpen = (todo) => {
+    setIsShow(true);
+    setCurrentToDo(todo);
+  };
+  console.log(currentToDo);
   return (
     <div className="App">
-      <Header data={paths}>
-        <Link></Link>
-      </Header>
-      <Content>
-        <div className="contanier">
-          {" "}
-          <Text />
-        </div>
-      </Content>
-
-      <Footer></Footer>
+      <Title size={50}>ToDo List</Title>
+      <button onClick={() => setIsShow(true)}>Show Modal</button>
+      <ToDoList
+        handleOpen={handleOpen}
+        deleteData={deleteData}
+        toDos={todos}
+      ></ToDoList>
+      {isShow && (
+        <Modal
+          currentToDo={currentToDo}
+          addData={addData}
+          closeModal={() => setIsShow(false)}
+        ></Modal>
+      )}
     </div>
   );
 }
