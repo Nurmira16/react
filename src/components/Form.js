@@ -26,14 +26,17 @@ const Form = ({ addData, currentToDo, handleEdit, closeModal }) => {
   };
   return (
     <>
-      {Object.keys(value).map((item) => (
-        <Input
-          key={item}
-          name={item}
-          value={value[item]}
-          onChange={changeName}
-        ></Input>
-      ))}
+      {Object.keys(value).map(
+        (item) =>
+          item !== "id" && (
+            <Input
+              key={item}
+              name={item}
+              value={value[item]}
+              onChange={changeName}
+            ></Input>
+          )
+      )}
       <button onClick={action}>{isEdit ? "Edit" : "No data"}</button>
     </>
   );
