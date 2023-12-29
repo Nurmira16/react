@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Input from "./Input";
-const Form = ({ addData, currentToDo }) => {
+const Form = ({ addData, currentToDo, handleEdit, closeModal }) => {
   const [value, setvalue] = useState(
     currentToDo.title
       ? currentToDo
@@ -15,6 +15,15 @@ const Form = ({ addData, currentToDo }) => {
     setvalue({ ...value, [e.target.name]: e.target.value });
   };
   const isEdit = currentToDo.title ? true : false;
+  const action = () => {
+    if (isEdit) {
+      handleEdit(value);
+      closeModal();
+    } else {
+      addData(value);
+      closeModal();
+    }
+  };
   return (
     <>
       {Object.keys(value).map((item) => (
@@ -25,9 +34,7 @@ const Form = ({ addData, currentToDo }) => {
           onChange={changeName}
         ></Input>
       ))}
-      <button onClick={() => addData(value)}>
-        {isEdit ? "Edit" : "No data"}
-      </button>
+      <button onClick={action}>{isEdit ? "Edit" : "No data"}</button>
     </>
   );
 };

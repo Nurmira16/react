@@ -18,10 +18,26 @@ function App() {
     const newToDo = [...todos, { ...data, id: Date.now() }];
     setToDos(newToDo);
   };
-  const deleteData = (id) => {
-    const newToDo = todos.filter((todo) => todo.id !== id);
+  const deleteData = (data) => {
+    const newToDo = todos.filter((todo) => todo.id !== data.id);
 
     setToDos(newToDo);
+  };
+
+  const handleEdit = (todo) => {
+    setToDos(
+      todos.map((item) => {
+        if (item.id === todo.id) {
+          return todo;
+        } else {
+          return item;
+        }
+      })
+    );
+  };
+  const closeModal = () => {
+    setIsShow(false);
+    setCurrentToDo([]);
   };
 
   // Modal
@@ -29,21 +45,25 @@ function App() {
     setIsShow(true);
     setCurrentToDo(todo);
   };
-  console.log(currentToDo);
+
   return (
     <div className="App">
-      <Title size={50}>ToDo List</Title>
-      <button onClick={() => setIsShow(true)}>Show Modal</button>
+      <div className="title">
+        <Title size={40}>ToDo List</Title>
+        <button onClick={() => setIsShow(true)}>Show Modal</button>
+      </div>
       <ToDoList
         handleOpen={handleOpen}
         deleteData={deleteData}
         toDos={todos}
+        handleEdit={handleEdit}
       ></ToDoList>
       {isShow && (
         <Modal
+          handleEdit={handleEdit}
           currentToDo={currentToDo}
           addData={addData}
-          closeModal={() => setIsShow(false)}
+          closeModal={closeModal}
         ></Modal>
       )}
     </div>

@@ -1,10 +1,16 @@
-const ToDoList = ({ toDos, handleDelete, handleOpen }) => {
+import ToDoCard from "./ToDoCard";
+
+const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
   return (
-    <div>
+    <div className="cards">
       {toDos.map((item) => (
-        <p onClick={() => handleOpen(item)} key={item.title}>
-          {item.id}
-        </p>
+        <ToDoCard
+          key={item.id}
+          handleOpen={() => handleOpen(item)}
+          item={item}
+          handleDelete={deleteData}
+          handleEdit={handleEdit}
+        ></ToDoCard>
       ))}
     </div>
   );
