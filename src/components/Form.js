@@ -37,7 +37,7 @@ const Form = ({ addData, currentToDo, handleEdit, closeModal }) => {
             ></Input>
           )
       )}
-      <button onClick={action}>{isEdit ? "Edit" : "No data"}</button>
+      <button onClick={action}>{isEdit ? "Edit" : "Add task"}</button>
     </>
   );
 };

@@ -1,15 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Title from "../components/Title";
 import ToDoList from "../components/ToDoList";
 import Modal from "../components/Modal";
 
 const MainPage = () => {
-  const toDos = [
-    { title: "dance", age: 20, id: 1 },
-    { title: "eat", age: 10, id: 2 },
-    { title: "sport", age: 90, id: 3 },
-  ];
-  const [todos, setToDos] = useState(toDos);
+  // const toDos = [
+  //   { title: "dance", age: 20, id: 1 },
+  //   { title: "eat", age: 10, id: 2 },
+  //   { title: "sport", age: 90, id: 3 },
+  // ];
+  const [todos, setToDos] = useState([]);
   const [isShow, setIsShow] = useState(false);
   const [currentToDo, setCurrentToDo] = useState({});
 
@@ -47,6 +47,30 @@ const MainPage = () => {
   const sort = (todos) => {
     setToDos([...todos].sort((a, b) => a.age - b.age));
   };
+
+  // const [count, setCount] = useState(0);
+  // useEffect(() => {
+  //   if (count === 5) return;
+  //   const timeoutId = setTimeout(() => {
+  //     setCount((prev) => prev + 1);
+  //     console.log("increasing");
+  //   }, 1500);
+  //   return () => clearInterval(timeoutId);
+  // }, [count]);
+
+  useEffect(() => {
+    if (todos.length === 0) {
+      return;
+    }
+    localStorage.setItem("list", JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    const list = JSON.parse(localStorage.getItem("list"));
+    setToDos(list);
+
+    console.log(todos);
+  }, []);
   return (
     <div className="App">
       <div className="title">
