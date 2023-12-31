@@ -14,7 +14,7 @@ const ToDoCard = ({ item, handleOpen, handleEdit, handleDelete }) => {
           {" "}
           <span className="material-symbols-outlined edit">edit</span>
         </button>
-        <button onClick={() => handleDelete(item)}>
+        <button onClick={() => handleDelete(item.id)}>
           <span className="material-symbols-outlined delete">delete</span>
         </button>
       </div>

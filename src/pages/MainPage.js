@@ -17,11 +17,6 @@ const MainPage = () => {
     const newToDo = [...todos, { ...data, id: Date.now() }];
     setToDos(newToDo);
   };
-  const deleteData = (data) => {
-    const newToDo = todos.filter((todo) => todo.id !== data.id);
-
-    setToDos(newToDo);
-  };
 
   const handleEdit = (todo) => {
     setToDos(
@@ -58,6 +53,36 @@ const MainPage = () => {
   //   return () => clearInterval(timeoutId);
   // }, [count]);
 
+  // useEffect(() => {
+  //   const list = JSON.parse(localStorage.getItem("list"));
+  //   setToDos(list);
+  // }, []);
+
+  // useEffect(() => {
+  //   const storedList = localStorage.getItem("list");
+  //   if (storedList) {
+  //     const list = JSON.parse(storedList);
+  //     setToDos(list);
+  //   }
+  // }, []);
+
+  const deleteData = (id) => {
+    const newToDo = todos.filter((todo) => todo.id !== id);
+    if (newToDo.length === 0) {
+      localStorage.setItem("list", JSON.stringify(newToDo));
+    }
+    setToDos(newToDo);
+  };
+  useEffect(() => {
+    const list = localStorage.getItem("list");
+    if (list) {
+      const data = JSON.parse(list);
+      setToDos(data);
+    } else {
+      return;
+    }
+  }, []);
+
   useEffect(() => {
     if (todos.length === 0) {
       return;
@@ -65,12 +90,12 @@ const MainPage = () => {
     localStorage.setItem("list", JSON.stringify(todos));
   }, [todos]);
 
-  useEffect(() => {
-    const list = JSON.parse(localStorage.getItem("list"));
-    setToDos(list);
+  // list.forEach((item) => {
+  //   if (!todos.find((todo) => todo.id === item.id)) {
+  //     deleteData(item);
+  //   }
+  // });
 
-    console.log(todos);
-  }, []);
   return (
     <div className="App">
       <div className="title">
