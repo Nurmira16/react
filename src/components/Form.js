@@ -34,6 +34,7 @@ const Form = ({ addData, currentToDo, handleEdit, closeModal }) => {
               name={item}
               value={value[item]}
               onChange={changeName}
+              placeholder={item + ":"}
             ></Input>
           )
       )}

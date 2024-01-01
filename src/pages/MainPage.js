@@ -42,7 +42,6 @@ const MainPage = () => {
   const sort = (todos) => {
     setToDos([...todos].sort((a, b) => a.age - b.age));
   };
-
   // const [count, setCount] = useState(0);
   // useEffect(() => {
   //   if (count === 5) return;

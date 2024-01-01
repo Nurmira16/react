@@ -1,18 +1,27 @@
+import { type } from "@testing-library/user-event/dist/type";
 import ToDoCard from "./ToDoCard";
+import { useEffect, useState } from "react";
 
 const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
+  useEffect(() => {
+    localStorage.setItem("type", type);
+  }, [type]);
   return (
-    <div className="cards">
-      {toDos.map((item) => (
-        <ToDoCard
-          key={item.id}
-          handleOpen={() => handleOpen(item)}
-          item={item}
-          handleDelete={deleteData}
-          handleEdit={handleEdit}
-        ></ToDoCard>
-      ))}
-    </div>
+    <>
+      <button>Asc</button>
+      <button>Desc</button>
+      <div className="cards">
+        {toDos.map((item) => (
+          <ToDoCard
+            key={item.id}
+            handleOpen={() => handleOpen(item)}
+            item={item}
+            handleDelete={deleteData}
+            handleEdit={handleEdit}
+          ></ToDoCard>
+        ))}
+      </div>
+    </>
   );
 };
 
