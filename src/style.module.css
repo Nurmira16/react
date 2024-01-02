@@ -6,3 +6,9 @@
   background-color: #4e906b;
   border: 1px solid green;
 }
+.inputCustom {
+  border-radius: 10px;
+  background-color: #4e906b;
+  border: none;
+  opacity: 0.5;
+}
