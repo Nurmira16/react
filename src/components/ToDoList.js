@@ -1,17 +1,55 @@
-import { type } from "@testing-library/user-event/dist/type";
-import ToDoCard from "./ToDoCard";
 import { useEffect, useState } from "react";
+import ToDoCard from "./ToDoCard";
+import classes from "../style.module.css";
+import { classNames } from "./helper";
 
 const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
-  useEffect(() => {
+  const types = ["asc", "des", "letter"];
+  const sort = (type) => {
+    switch (type) {
+      case "asc":
+        return toDos.sort((a, b) => a.age - b.age);
+      case "des":
+        return toDos.sort((a, b) => b.age - a.age);
+      case "letter":
+        return toDos.sort((a, b) => a.title.localeCompare(b.title));
+    }
+  };
+  const [type, setType] = useState("asc");
+  const handleType = (type) => {
     localStorage.setItem("type", type);
-  }, [type]);
+    setType(type);
+  };
+  useEffect(() => {
+    if (!type) return;
+    setType(localStorage.getItem("type"));
+  }, []);
+
   return (
     <>
-      <button>Asc</button>
-      <button>Desc</button>
+      {types.map((element) => (
+        <button
+          className={classNames(
+            classes.buttonActive,
+            classes.button,
+            element === type
+          )}
+          onClick={() => handleType(element)}
+        >
+          {element}
+        </button>
+      ))}
+
+      {/* <button
+        className={type === "asc" && classes.buttonActive}
+        onClick={() => handleType("asc")}
+      >
+        Asc
+      </button>
+      <button onClick={() => handleType("des")}>Desc</button>
+      <button onClick={() => handleType("letter")}>Letter</button> */}
       <div className="cards">
-        {toDos.map((item) => (
+        {sort(type).map((item) => (
           <ToDoCard
             key={item.id}
             handleOpen={() => handleOpen(item)}

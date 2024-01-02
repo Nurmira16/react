@@ -1,4 +1,8 @@
-.titleMain {
-  font-size: 50px;
-  color: blueviolet;
+.button {
+  font-size: 15px;
+}
+.buttonActive {
+  font-size: 15px;
+  background-color: #4e906b;
+  border: 1px solid green;
 }
