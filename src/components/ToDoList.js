@@ -10,6 +10,24 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
 
   const [type, setType] = useState("asc");
   const [inputValue, setInputValue] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
+  useEffect(() => {
+    const filteredToDo = toDos.filter((todo) =>
+      todo.title.toLowerCase().includes(inputValue)
+    );
+    setFilteredList(filteredToDo);
+  }, [inputValue, toDos]);
+  const sort = (type) => {
+    switch (type) {
+      case "asc":
+        return toDos.sort((a, b) => a.age - b.age);
+      case "des":
+        return toDos.sort((a, b) => b.age - a.age);
+      case "letter":
+        return toDos.sort((a, b) => a.title.localeCompare(b.title));
+    }
+  };
+  // console.log(sort(type));
   const handleType = (type) => {
     localStorage.setItem("type", type);
     setType(type);
@@ -19,7 +37,7 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
     setType(localStorage.getItem("type"));
   }, []);
   const { sortedArray, old } = useSort(toDos, type);
-  console.log(sortedArray);
+
   return (
     <>
       <Input
@@ -50,7 +68,7 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
       <button onClick={() => handleType("des")}>Desc</button>
       <button onClick={() => handleType("letter")}>Letter</button> */}
       <div className="cards">
-        {toDos.map((item) => (
+        {filteredList.map((item) => (
           <ToDoCard
             key={item.id}
             handleOpen={() => handleOpen(item)}

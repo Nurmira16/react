@@ -98,7 +98,7 @@ const MainPage = () => {
   return (
     <div className="App">
       <div className="title">
-        <Title size={40}>ToDo List</Title>
+        <Title size={40}>Package</Title>
         <div className="mainButtons">
           <button onClick={() => setIsShow(true)}>Create task</button>
           <button onClick={() => sort(todos)}>Sort</button>
