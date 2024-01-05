@@ -53,11 +53,12 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
   });
   const [page, setPage] = useState(1);
   const handlePrev = () => {
-    if (pag.offset === 0) return;
+    if (page === 1) return;
     setPag((prev) => ({ ...prev, offset: prev.offset - prev.limit }));
     setPage(page - 1);
   };
   const handleNext = () => {
+    if (page === countPages) return;
     setPag((prev) => ({ ...prev, offset: prev.offset + prev.limit }));
     setPage(page + 1);
   };
