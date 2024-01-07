@@ -7,7 +7,15 @@ import Example, { useSort } from "./hooks";
 import SumComponent from "./sumComponent";
 import Hoc from "./Hoc";
 
-const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
+const ToDoList = ({
+  toDos,
+  deleteData,
+  handleOpen,
+  handleEdit,
+  page,
+  handleNext,
+  handlePrev,
+}) => {
   const types = ["asc", "des", "letter"];
 
   const [type, setType] = useState("asc");
@@ -46,20 +54,10 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
     if (!type) return;
     setType(localStorage.getItem("type"));
   }, []);
-  const { sortedArray, old } = useSort(toDos, type);
-  const [pag, setPag] = useState({ limit: 2, offset: 0 });
-  const [page, setPage] = useState(1);
-  const handleNext = () => {
-    setPage(page + 1);
-    setPag((prev) => ({ ...prev, offset: prev.offset + pag.limit }));
-  };
-  const handlePrev = () => {
-    if (pag.offset === 0) return;
-    setPage(page - 1);
-    setPag((prev) => ({ ...prev, offset: prev.offset - pag.limit }));
-  };
+  // const { sortedArray, old } = useSort(toDos, type);
+  // const [pag, setPag] = useState({ limit: 2, offset: 0 });
 
-  const countPages = Math.ceil(sort(type).length / pag.limit);
+  // const countPages = Math.ceil(sort(type).length / pag.limit);
 
   return (
     <>
@@ -101,20 +99,18 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
       <button onClick={() => handleType("des")}>Desc</button>
       <button onClick={() => handleType("letter")}>Letter</button> */}
       <div className="cards">
-        {sort(type)
-          .slice(pag.offset, pag.limit + pag.offset)
-          .map((item) => (
-            <ToDoCard
-              key={item.id}
-              handleOpen={() => handleOpen(item)}
-              item={item}
-              handleDelete={deleteData}
-              handleEdit={handleEdit}
-            ></ToDoCard>
-          ))}
+        {sort(type).map((item) => (
+          <ToDoCard
+            key={item.id}
+            handleOpen={() => handleOpen(item)}
+            item={item}
+            handleDelete={deleteData}
+            handleEdit={handleEdit}
+          ></ToDoCard>
+        ))}
       </div>
       <button onClick={handlePrev}>Prev</button>
-      {page + " / " + countPages}
+      {page}
       <button onClick={handleNext}>Next</button>
     </>
   );

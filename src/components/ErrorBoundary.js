@@ -13,18 +13,17 @@ class ErrorBoundary extends Component {
 
   componentDidCatch(error, errorInfo) {
     // You can also log the error to an error reporting service
-    console.log("hello");
+    console.log(error, errorInfo);
   }
 
   render() {
     if (this.state.hasError) {
       // You can render any custom fallback UI
       return (
-        <>
-          {" "}
+        <div>
           <button onClick={() => window.location.reload()}>Reload</button>
           <h1>Something went wrong.</h1>
-        </>
+        </div>
       );
     }
 

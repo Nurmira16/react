@@ -72,28 +72,44 @@ const MainPage = () => {
     }
     setToDos(newToDo);
   };
-  useEffect(() => {
-    const list = localStorage.getItem("list");
-    if (list) {
-      const data = JSON.parse(list);
-      setToDos(data);
-    } else {
-      return;
-    }
-  }, []);
+  // useEffect(() => {
+  //   const list = localStorage.getItem("list");
+  //   if (list) {
+  //     const data = JSON.parse(list);
+  //     setToDos(data);
+  //   } else {
+  //     return;
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (todos.length === 0) {
-      return;
-    }
-    localStorage.setItem("list", JSON.stringify(todos));
-  }, [todos]);
+  // useEffect(() => {
+  //   if (todos.length === 0) {
+  //     return;
+  //   }
+  //   localStorage.setItem("list", JSON.stringify(todos));
+  // }, [todos]);
 
   // list.forEach((item) => {
   //   if (!todos.find((todo) => todo.id === item.id)) {
   //     deleteData(item);
   //   }
   // });
+  const [page, setPage] = useState(1);
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${page}`)
+      .then((response) => response.json())
+      .then((data) => setToDos(data));
+  }, [page]);
+
+  const handleNext = () => {
+    setPage(page + 1);
+    // setPag((prev) => ({ ...prev, offset: prev.offset + pag.limit }));
+  };
+  const handlePrev = () => {
+    if (page === 1) return;
+    setPage(page - 1);
+    // setPag((prev) => ({ ...prev, offset: prev.offset - pag.limit }));
+  };
 
   return (
     <div className="App">
@@ -109,6 +125,9 @@ const MainPage = () => {
         deleteData={deleteData}
         toDos={todos}
         handleEdit={handleEdit}
+        page={page}
+        handleNext={handleNext}
+        handlePrev={handlePrev}
       ></ToDoList>
 
       {isShow && (

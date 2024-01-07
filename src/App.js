@@ -4,6 +4,7 @@ import "./style.css";
 import MainPage from "./pages/MainPage";
 import ExMemo from "./components/ExMemo";
 import ErrorBoundary from "./components/ErrorBoundary";
+import ClassComp from "./components/ClassComp";
 
 function App() {
   const [value, setValue] = useState("");
@@ -20,14 +21,18 @@ function App() {
   // const result = useMemo(() => {
   //   return amount(math.a, math.b);
   // }, []);
-
+  const [show, setShow] = useState(true);
   const result = amount(math.a, math.b);
   return (
-    <MainPage></MainPage>
+    <>
+      <MainPage></MainPage>
+    </>
     // <>
     //   <input value={value} onChange={(e) => setValue(e.target.value)}></input>
     //   <ExMemo result={result} log={log}></ExMemo>
     // </>
+    // <button onClick={() => setShow(!show)}>Change</button>
+    // {show && <ClassComp />}
   );
 }
 
