@@ -47,23 +47,19 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
     setType(localStorage.getItem("type"));
   }, []);
   const { sortedArray, old } = useSort(toDos, type);
-  const [pag, setPag] = useState({
-    limit: 2,
-    offset: 0,
-  });
+  const [pag, setPag] = useState({ limit: 2, offset: 0 });
   const [page, setPage] = useState(1);
-  const handlePrev = () => {
-    if (page === 1) return;
-    setPag((prev) => ({ ...prev, offset: prev.offset - prev.limit }));
-    setPage(page - 1);
-  };
   const handleNext = () => {
-    if (page === countPages) return;
-    setPag((prev) => ({ ...prev, offset: prev.offset + prev.limit }));
     setPage(page + 1);
+    setPag((prev) => ({ ...prev, offset: prev.offset + pag.limit }));
   };
+  const handlePrev = () => {
+    if (pag.offset === 0) return;
+    setPage(page - 1);
+    setPag((prev) => ({ ...prev, offset: prev.offset - pag.limit }));
+  };
+
   const countPages = Math.ceil(sort(type).length / pag.limit);
-  console.log(countPages, sort(type).length);
 
   return (
     <>
@@ -106,7 +102,7 @@ const ToDoList = ({ toDos, deleteData, handleOpen, handleEdit }) => {
       <button onClick={() => handleType("letter")}>Letter</button> */}
       <div className="cards">
         {sort(type)
-          .slice(pag.offset, pag.offset + pag.limit)
+          .slice(pag.offset, pag.limit + pag.offset)
           .map((item) => (
             <ToDoCard
               key={item.id}
