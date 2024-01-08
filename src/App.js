@@ -5,6 +5,7 @@ import MainPage from "./pages/MainPage";
 import ExMemo from "./components/ExMemo";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ClassComp from "./components/ClassComp";
+import AsyncFun from "./components/async";
 
 function App() {
   const [value, setValue] = useState("");
@@ -25,7 +26,8 @@ function App() {
   const result = amount(math.a, math.b);
   return (
     <>
-      <MainPage></MainPage>
+      <AsyncFun></AsyncFun>
+      {/* <MainPage></MainPage> */}
     </>
     // <>
     //   <input value={value} onChange={(e) => setValue(e.target.value)}></input>
