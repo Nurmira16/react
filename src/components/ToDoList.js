@@ -65,7 +65,7 @@ const ToDoList = ({
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
       ></Input>
-      <Hoc Component={SumComponent}></Hoc>
+      {/* <Hoc Component={SumComponent}></Hoc> */}
 
       {/* <SumComponent
         render={(sum1, sum2) => {

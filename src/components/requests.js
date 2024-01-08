@@ -14,7 +14,10 @@ export const fetchToDosById = (id) => {
 };
 
 export const fetchToDosByParams = (params) => {
-  const response = $api.get(ENDPOINTS.TITLE, { params });
+  const response = $api.get(ENDPOINTS.TITLE, {
+    params: params,
+    headers: { "X-Custom-Footer": "footer" },
+  });
 
   return response;
 };

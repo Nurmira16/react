@@ -10,7 +10,7 @@ const AsyncFun = () => {
   };
   useEffect(() => {
     // fetchToDosByParams(params).then((data) => console.log(data));
-    fetchToDos().then(({ data }) => {
+    fetchToDosByParams(params).then(({ data }) => {
       const todolist = data.map((todo) => todo.title);
       setTitle(todolist);
     });
