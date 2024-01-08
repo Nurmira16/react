@@ -1,18 +1,30 @@
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { $api } from "./requester";
+import { useEffect, useState } from "react";
+import { fetchToDos, fetchToDosByParams } from "./requests";
 
 const AsyncFun = () => {
-  //   const data = instance.get("/").then((h) => console.log(h));
-  // const [state, setState] = useState([]);
-  //   setState(data);
-  const fetchData = async () => {
-    const response = await $api.get("/");
-    return response;
+  const [title, setTitle] = useState([]);
+
+  const params = {
+    _limit: 3,
+    _page: 1,
   };
   useEffect(() => {
-    fetchData().then((data) => console.log(data));
+    // fetchToDosByParams(params).then((data) => console.log(data));
+    fetchToDos().then(({ data }) => {
+      const todolist = data.map((todo) => todo.title);
+      setTitle(todolist);
+    });
   }, []);
-  return <></>;
+  return (
+    <>
+      {title.map((todo) => {
+        return (
+          <>
+            <h1>{todo}</h1>
+          </>
+        );
+      })}
+    </>
+  );
 };
 export default AsyncFun;

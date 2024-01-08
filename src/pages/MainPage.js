@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Title from "../components/Title";
 import ToDoList from "../components/ToDoList";
 import Modal from "../components/Modal";
+import { fetchToDos, fetchToDosByParams } from "../components/requests";
 
 const MainPage = () => {
   // const toDos = [
@@ -96,9 +97,15 @@ const MainPage = () => {
   // });
   const [page, setPage] = useState(1);
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${page}`)
-      .then((response) => response.json())
-      .then((data) => setToDos(data));
+    // fetch(`https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${page}`)
+    //   .then((response) => response.json())
+    //   .then((data) => setToDos(data));
+
+    const params = {
+      _limit: 3,
+      _page: page,
+    };
+    fetchToDosByParams(params).then(({ data }) => setToDos(data));
   }, [page]);
 
   const handleNext = () => {

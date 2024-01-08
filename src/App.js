@@ -26,8 +26,8 @@ function App() {
   const result = amount(math.a, math.b);
   return (
     <>
-      <AsyncFun></AsyncFun>
-      {/* <MainPage></MainPage> */}
+      {/* <AsyncFun></AsyncFun> */}
+      <MainPage></MainPage>
     </>
     // <>
     //   <input value={value} onChange={(e) => setValue(e.target.value)}></input>
