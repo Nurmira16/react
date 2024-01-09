@@ -5,3 +5,9 @@ export const $api = axios.create({
   timeout: 1000,
   headers: { "X-Custom-Header": "foobar" },
 });
+
+$api.interceptors.request.use((config) => {
+  config.headers["Content-Type"] = "application/json";
+  console.log(config);
+  return config;
+});

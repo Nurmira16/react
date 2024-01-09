@@ -1,30 +1,20 @@
 import { useEffect, useState } from "react";
-import { fetchToDos, fetchToDosByParams } from "./requests";
+import { fetchToDos, fetchToDosById } from "./requests";
+import { Link, NavLink } from "react-router-dom";
 
 const AsyncFun = () => {
-  const [title, setTitle] = useState([]);
-
-  const params = {
-    _limit: 3,
-    _page: 1,
-  };
-  useEffect(() => {
-    // fetchToDosByParams(params).then((data) => console.log(data));
-    fetchToDosByParams(params).then(({ data }) => {
-      const todolist = data.map((todo) => todo.title);
-      setTitle(todolist);
-    });
-  }, []);
+  // const params = {
+  //   _limit: 2,
+  //   _page: 1,
+  // };
+  // useEffect(() => {
+  //   fetchToDos().then((data) => console.log(data));
+  //   // fetchToDosById(params).then((data) => console.log(data));
+  // }, []);
   return (
-    <>
-      {title.map((todo) => {
-        return (
-          <>
-            <h1>{todo}</h1>
-          </>
-        );
-      })}
-    </>
+    <div>
+      <p>Main Page</p>
+    </div>
   );
 };
 export default AsyncFun;
