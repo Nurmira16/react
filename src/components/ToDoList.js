@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ToDoCard from "./ToDoCard";
 import classes from "../style.module.css";
 import { classNames } from "./helper";
@@ -6,9 +6,9 @@ import Input from "../ui/inputs";
 import Example, { useSort } from "./hooks";
 import SumComponent from "./sumComponent";
 import Hoc from "./Hoc";
+import { StoreContext } from "./storeContext";
 
 const ToDoList = ({
-  toDos,
   deleteData,
   handleOpen,
   handleEdit,
@@ -16,6 +16,7 @@ const ToDoList = ({
   handleNext,
   handlePrev,
 }) => {
+  const { todos } = useContext(StoreContext);
   const types = ["asc", "des", "letter"];
 
   const [type, setType] = useState("asc");
@@ -28,7 +29,7 @@ const ToDoList = ({
   //   setFilteredList(filteredToDo);
   // }, [inputValue, toDos]);
   const sort = (type) => {
-    const filteredToDo = toDos.filter((todo) =>
+    const filteredToDo = todos.filter((todo) =>
       todo.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     switch (type) {

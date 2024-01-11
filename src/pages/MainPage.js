@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Title from "../components/Title";
 import ToDoList from "../components/ToDoList";
 import Modal from "../components/Modal";
 import { fetchToDos, fetchToDosByParams } from "../components/requests";
+import { StoreContext } from "../components/storeContext";
 
 const MainPage = () => {
   // const toDos = [
@@ -10,7 +11,9 @@ const MainPage = () => {
   //   { title: "eat", age: 10, id: 2 },
   //   { title: "sport", age: 90, id: 3 },
   // ];
-  const [todos, setToDos] = useState([]);
+  const { todos, setToDos } = useContext(StoreContext);
+  console.log(todos);
+  // const [todos, setToDos] = useState([]);
   const [isShow, setIsShow] = useState(false);
   const [currentToDo, setCurrentToDo] = useState({});
 
@@ -130,7 +133,6 @@ const MainPage = () => {
       <ToDoList
         handleOpen={handleOpen}
         deleteData={deleteData}
-        toDos={todos}
         handleEdit={handleEdit}
         page={page}
         handleNext={handleNext}
