@@ -32,7 +32,6 @@ function App() {
   return (
     <>
       <NavLink to={"/about"}>to About Page</NavLink>
-
       <NavLink to={"/"}>to Main Page</NavLink>
       <AppRoutes></AppRoutes>
       {/* <AsyncFun></AsyncFun> */}
