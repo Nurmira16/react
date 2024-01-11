@@ -16,7 +16,8 @@ const ToDoList = ({
   handleNext,
   handlePrev,
 }) => {
-  const { todos, sort, inputValue, setInputValue } = useContext(StoreContext);
+  const { todos, sort, inputValue, setInputValue, reducers } =
+    useContext(StoreContext);
   const types = ["asc", "des", "letter"];
 
   const [type, setType] = useState("asc");
@@ -42,13 +43,14 @@ const ToDoList = ({
   // const [pag, setPag] = useState({ limit: 2, offset: 0 });
 
   // const countPages = Math.ceil(sort(type).length / pag.limit);
+  const handleChangeValue = (e) => {
+    reducers.sort(type, e.target.value);
+    setInputValue(e.target.value);
+  };
 
   return (
     <>
-      <Input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      ></Input>
+      <Input value={inputValue} onChange={handleChangeValue}></Input>
       {/* <Hoc Component={SumComponent}></Hoc> */}
 
       {/* <SumComponent
@@ -83,7 +85,7 @@ const ToDoList = ({
       <button onClick={() => handleType("des")}>Desc</button>
       <button onClick={() => handleType("letter")}>Letter</button> */}
       <div className="cards">
-        {sort(type, inputValue).map((item) => (
+        {todos.map((item) => (
           <ToDoCard
             key={item.id}
             handleOpen={() => handleOpen(item)}

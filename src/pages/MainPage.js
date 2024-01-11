@@ -11,7 +11,7 @@ const MainPage = () => {
   //   { title: "eat", age: 10, id: 2 },
   //   { title: "sport", age: 90, id: 3 },
   // ];
-  const { todos, setToDos } = useContext(StoreContext);
+  const { todos, setToDos, inputValue } = useContext(StoreContext);
   console.log(todos);
   // const [todos, setToDos] = useState([]);
   const [isShow, setIsShow] = useState(false);
@@ -110,6 +110,16 @@ const MainPage = () => {
     };
     fetchToDosByParams(params).then(({ data }) => setToDos(data));
   }, [page]);
+
+  useEffect(() => {
+    if (!inputValue) {
+      const params = {
+        _limit: 3,
+        _page: page,
+      };
+      fetchToDosByParams(params).then(({ data }) => setToDos(data));
+    }
+  }, [inputValue]);
 
   const handleNext = () => {
     setPage(page + 1);
