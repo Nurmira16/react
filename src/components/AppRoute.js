@@ -5,11 +5,11 @@ import { Suspense } from "react";
 const AppRoutes = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <Routes>
+      {/* <Routes>
         {routes.map(({ path, element }) => (
           <Route path={path} element={element}></Route>
         ))}
-      </Routes>
+      </Routes> */}
     </Suspense>
   );
 };

@@ -31,9 +31,9 @@ function App() {
   const result = amount(math.a, math.b);
   return (
     <>
-      <NavLink to={"/about"}>to About Page</NavLink>
+      {/* <NavLink to={"/about"}>to About Page</NavLink>
       <NavLink to={"/"}>to Main Page</NavLink>
-      <AppRoutes></AppRoutes>
+      <AppRoutes></AppRoutes> */}
       {/* <AsyncFun></AsyncFun> */}
       {/* <MainPage></MainPage> */}
     </>
