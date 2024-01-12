@@ -8,6 +8,6 @@ export const $api = axios.create({
 
 $api.interceptors.request.use((config) => {
   config.headers["Content-Type"] = "application/json";
-  console.log(config);
+
   return config;
 });

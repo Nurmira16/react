@@ -4,6 +4,7 @@ const StoreProvider = ({ children }) => {
   const [state, setState] = useState({});
   const [todos, setToDos] = useState([]);
   const [inputValue, setInputValue] = useState([]);
+  const [store, setStore] = useState("");
   const sort = (type, search) => {
     const filteredToDo = todos.filter((todo) =>
       todo.title.toLowerCase().includes(search.toLowerCase())
@@ -38,6 +39,8 @@ const StoreProvider = ({ children }) => {
     inputValue,
     setInputValue,
     reducers,
+    store,
+    setStore,
   };
   return (
     <StoreContext.Provider value={value}>{children}</StoreContext.Provider>

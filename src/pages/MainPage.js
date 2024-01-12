@@ -11,8 +11,9 @@ const MainPage = () => {
   //   { title: "eat", age: 10, id: 2 },
   //   { title: "sport", age: 90, id: 3 },
   // ];
-  const { todos, setToDos, inputValue } = useContext(StoreContext);
-  console.log(todos);
+  const { todos, setToDos, inputValue, store, setStore } =
+    useContext(StoreContext);
+
   // const [todos, setToDos] = useState([]);
   const [isShow, setIsShow] = useState(false);
   const [currentToDo, setCurrentToDo] = useState({});
@@ -99,6 +100,38 @@ const MainPage = () => {
   //   }
   // });
   const [page, setPage] = useState(1);
+  // useEffect(() => {
+  //   // fetch(`https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${page}`)
+  //   //   .then((response) => response.json())
+  //   //   .then((data) => setToDos(data));
+
+  //   const params = {
+  //     _limit: 3,
+  //     _page: page,
+  //   };
+
+  //   setStore("pending");
+
+  //   fetchToDosByParams(params).then((data) => {
+  //     if (data.status === 200) {
+  //       setToDos(data.data);
+  //       setStore("fullfilled");
+  //     } else {
+  //       setStore("rejected");
+  //     }
+  //   });
+  // }, [page]);
+
+  // useEffect(() => {
+  //   if (!inputValue) {
+  //     const params = {
+  //       _limit: 3,
+  //       _page: page,
+  //     };
+  //     fetchToDosByParams(params).then(({ data }) => setToDos(data));
+  //   }
+  // }, [inputValue]);
+
   useEffect(() => {
     // fetch(`https://jsonplaceholder.typicode.com/todos?_limit=5&_page=${page}`)
     //   .then((response) => response.json())
@@ -108,7 +141,17 @@ const MainPage = () => {
       _limit: 3,
       _page: page,
     };
-    fetchToDosByParams(params).then(({ data }) => setToDos(data));
+
+    setStore("pending");
+
+    fetchToDosByParams(params).then((data) => {
+      if (data.status === 200) {
+        setToDos(data.data);
+        setStore("fullfilled");
+      } else {
+        setStore("rejected");
+      }
+    });
   }, [page]);
 
   useEffect(() => {
@@ -117,7 +160,17 @@ const MainPage = () => {
         _limit: 3,
         _page: page,
       };
-      fetchToDosByParams(params).then(({ data }) => setToDos(data));
+
+      setStore("pending");
+
+      fetchToDosByParams(params).then((data) => {
+        if (data.status === 200) {
+          setToDos(data.data);
+          setStore("fullfilled");
+        } else {
+          setStore("rejected");
+        }
+      });
     }
   }, [inputValue]);
 

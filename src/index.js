@@ -12,10 +12,10 @@ root.render(
   <React.StrictMode>
     <ErrorBoundary>
       <StoreProvider>
-        <RouterProvider router={routes6}></RouterProvider>
-        {/* <BrowserRouter>
+        {/* <RouterProvider router={routes6}></RouterProvider> */}
+        <BrowserRouter>
           <App />
-        </BrowserRouter> */}
+        </BrowserRouter>
       </StoreProvider>
     </ErrorBoundary>
   </React.StrictMode>

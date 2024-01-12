@@ -16,7 +16,7 @@ const ToDoList = ({
   handleNext,
   handlePrev,
 }) => {
-  const { todos, sort, inputValue, setInputValue, reducers } =
+  const { todos, sort, inputValue, setInputValue, reducers, store } =
     useContext(StoreContext);
   const types = ["asc", "des", "letter"];
 
@@ -39,6 +39,14 @@ const ToDoList = ({
     if (!type) return;
     setType(localStorage.getItem("type"));
   }, []);
+  console.log(store);
+  if (store === "pending") {
+    return (
+      <div>
+        <h1>LOADING</h1>
+      </div>
+    );
+  }
   // const { sortedArray, old } = useSort(toDos, type);
   // const [pag, setPag] = useState({ limit: 2, offset: 0 });
 

@@ -31,11 +31,12 @@ function App() {
   const result = amount(math.a, math.b);
   return (
     <>
-      {/* <NavLink to={"/about"}>to About Page</NavLink>
+      <NavLink to={"/about"}>to About Page</NavLink>
       <NavLink to={"/"}>to Main Page</NavLink>
-      <AppRoutes></AppRoutes> */}
-      {/* <AsyncFun></AsyncFun> */}
-      {/* <MainPage></MainPage> */}
+      <AppRoutes></AppRoutes>
+
+      {/* <AsyncFun></AsyncFun>
+      <MainPage></MainPage> */}
     </>
     // <>
     //   <input value={value} onChange={(e) => setValue(e.target.value)}></input>
