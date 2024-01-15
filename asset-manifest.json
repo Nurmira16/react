@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Nurmira16/react.git/static/css/main.b703479e.css",
+    "main.js": "/Nurmira16/react.git/static/js/main.82ea83c1.js",
+    "index.html": "/Nurmira16/react.git/index.html",
+    "main.b703479e.css.map": "/Nurmira16/react.git/static/css/main.b703479e.css.map",
+    "main.82ea83c1.js.map": "/Nurmira16/react.git/static/js/main.82ea83c1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b703479e.css",
+    "static/js/main.82ea83c1.js"
+  ]
+}
